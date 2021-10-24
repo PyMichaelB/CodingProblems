@@ -12,7 +12,8 @@ class Solution:
 
         nums1Index = nums2Index = 0
 
-        total_length = len(nums1) + len(nums2)
+        length1, length2 = len(nums1), len(nums2)
+        total_length = length1 + length2
 
         # The position of the median in the merged array
         medianIndex = total_length / 2 - 0.5
@@ -21,8 +22,7 @@ class Solution:
         midpoint_limit = medianIndex + 0.5 if total_length % 2 == 0 else medianIndex
 
         # Current element and previous store values for just visited number and one before
-        current_element = min(nums1[nums1Index], nums2[nums2Index])
-        previous_element = current_element
+        current_element = previous_element = min(nums1[nums1Index], nums2[nums2Index])
 
         while True:
             # Index in merged array
@@ -33,14 +33,14 @@ class Solution:
                 previous_element = current_element
 
                 # Checked for if the first array has been exhausted
-                if nums1Index == len(nums1):
+                if nums1Index == length1:
                     # Reached end of first array
                     current_element = nums2[nums2Index]
                     nums2Index += 1
                     continue
 
                 # Check for if the second array has been exhausted or
-                if nums2Index == len(nums2):
+                if nums2Index == length2:
                     current_element = nums1[nums1Index]
                     nums1Index += 1
                     continue
